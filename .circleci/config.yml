@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   docker:
   - image: cimg/go:1.16
-  working_directory: /
+  working_directory: /workspace
   environment:
     GOPATH: /
     GOCACHE: /.cache/go-build
