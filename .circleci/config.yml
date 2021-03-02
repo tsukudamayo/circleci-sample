@@ -1,0 +1,18 @@
+version: 2
+
+jobs:
+  plan-apply:
+    working_directory: /tmp/project
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          name: terraform init & plan
+          command: |
+            terraform init -input=false
+            terraform plan -out tfapply
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
