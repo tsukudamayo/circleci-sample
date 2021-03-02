@@ -1,10 +1,14 @@
 version: 2
 
+machine:
+  environment:
+    AWS_DEFAULT_REGION: ap-northeast-1
+
 jobs:
   plan-apply:
     working_directory: /tmp/project
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light        region:
     steps:
       - checkout
       - run:
