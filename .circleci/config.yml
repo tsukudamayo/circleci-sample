@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-  - image: cimg:/go:1.16.0
+  - image: cimg:/go:1.16
   working_directory: /workspace
   environment:
     GOPATH: /
@@ -10,7 +10,7 @@ defaults: &defaults
     GO111MODULE: "on"
 
 jobs:
-  build:
+  setup-build:
     <<: *defaults
     steps:
     - run: go env
