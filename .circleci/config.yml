@@ -11,7 +11,7 @@ defaults: &defaults
 
 jobs:
   setup-build:
-    <<: &defaults
+    <<: *defaults
     steps:
       - run: go env
       - checkout
@@ -30,7 +30,7 @@ jobs:
             - /workspace
 
   test:
-    <<: &defaults
+    <<: *defaults
       steps:
         - restore_cache:
             keys:
