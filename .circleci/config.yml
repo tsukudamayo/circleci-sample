@@ -3,10 +3,10 @@ version: 2
 defaults: &defaults
   docker:
   - image: cimg/go:1.16
-  working_directory: /workspace
+  working_directory: ~/workspace
   environment:
-    GOPATH: /
-    GOCACHE: /.cache/go-build
+    GOPATH: ~/go
+    GOCACHE: ~/.cache/go-build
     GO111MODULE: "on"
 
 jobs:
@@ -17,17 +17,17 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - go-module-cache-v1-{{ checksum "/workspace/go.sum" }}
+        - go-module-cache-v1-{{ checksum "~/workspace/go.sum" }}
         - go-module-cache-v1-
     - run: go mod download
     - save_cache:
-        key: go-module-cache-v1-{{ checksum "/workspace/go.sum" }}
+        key: go-module-cache-v1-{{ checksum "~/workspace/go.sum" }}
         paths:
-        - /pkg/mod/cache
+        - ~/pkg/mod/cache
     - save_cache:
         key: workspace-v1-{{ .Environment.CIRCLE_SHA1 }}
         paths:
-        - /workspace
+        - ~/workspace
 
   test:
     <<: *defaults
@@ -37,7 +37,7 @@ jobs:
         - workspace-v1-{{ .Environment.CIRCLE_SHA1 }}
     - restore_cache:
         keys:
-        - go-module-cache-v1-{{ checksum "/workspace/go.sum" }}
+        - go-module-cache-v1-{{ checksum "~/workspace/go.sum" }}
         - go-module-cache-v1-
     - restore_cache:
         keys:
@@ -48,7 +48,7 @@ jobs:
     - save_cache:
         key: go-build-cache-v1-{{ .Branch }}-{{ .Revision }}
         paths:
-        - /.cache/go-build
+        - ~/.cache/go-build
 
 workflows:
   version: 2
