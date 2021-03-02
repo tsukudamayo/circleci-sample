@@ -10,7 +10,7 @@ defaults: &defaults
     GO111MODULE: "on"
 
 jobs:
-  setup-build:
+  build:
     <<: *defaults
     steps:
     - run: go env
