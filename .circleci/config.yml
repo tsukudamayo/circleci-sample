@@ -5,7 +5,7 @@ defaults: &defaults
   - image: cimg/go:1.16
   working_directory: ~/workspace
   environment:
-    GOPATH: ~/go
+    GOPATH: /
     GOCACHE: ~/.cache/go-build
     GO111MODULE: "on"
 
